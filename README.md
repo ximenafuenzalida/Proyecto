@@ -1,5 +1,11 @@
 # Proyecto
 
+Ximena Fuenzalida - 20192283
+
+
+Justificacion 
+El índice de democracia responde a factores como el tipo de regimen, y este a su vez, responde a factores determinados por el contexto politico y economico de los paises. Se analizara la influencia de los indices de  paridad, índice desarrollo humano e indice de alfabetismo  en los índices de democracia a nivel mundial, mayor democracia habrá en los países.
+
 Variable 1: Indice de desarrollo Humano
 Base de datos:  Wikipedia
 justificaciòn: 
@@ -13,6 +19,4 @@ Variable 3: Alfabetización (alfabetismo)
 Base de datos: Vdem 
 Justificación: La alfabetización como variable sirve para medir el indice de democracia  de los países con menores tazas de alfabetizacion. En este caso se busca comprobar que las tasas mas bajas de alfabetizacion se concentran enlas zonas mas pobres de los territorios en vias de desarrollo. Según Noddings (2013) la alfabetizacion y, por ende, el acceso al aprendizaje y a lenguaje es una de las formas basicas de democracia pues el lenguaje constityue la base de las sociadades, en caso contrario se cae en la antidemocracia ya que existen condiciones desiguales. 
 
-Justificacion 
-El índice de democracia responde a factores como el tipo de regimen, y este a su vez, responde a factores determinados por el contexto politico y economico de los paises. Se analizara la influencia de los indices de  paridad, índice desarrollo humano e indice de alfabetismo  en los índices de democracia a nivel mundial, mayor democracia habrá en los países.
 
