@@ -15,7 +15,7 @@ Variable 2: Indice de paridad (paridad )
 Base de datos: Statista 
 Justificaciòn: El indice de paridad responde a las desigualdades en  espacios laborales, participacion politica y acceso a la educacion dentro de un Estado. Es un factor determinante para la democracia, ya que a partir de el indice de paridad se puede obtener resultados sobre la democratizacion en respuesta a las dinamicas sociales correspondientes a participacion igyalitaria. Según Logroño, la democratizacion de las relaciones sociales se justifica en la deconstruccion de relaciones de poer jerárquicas. 2008) En base a esto se puede analizar de forma cuatitavtiva la influencia de la paridad en los indices de democracias. 
 
-Variable 3: Alfabetización (alfabetismo)
+Variable 3: Alfabetización (alfabetización)
 Base de datos: Vdem 
 Justificación: La alfabetización como variable sirve para medir el indice de democracia  de los países con menores tazas de alfabetizacion. En este caso se busca comprobar que las tasas mas bajas de alfabetizacion se concentran enlas zonas mas pobres de los territorios en vias de desarrollo. Según Noddings (2013) la alfabetizacion y, por ende, el acceso al aprendizaje y a lenguaje es una de las formas basicas de democracia pues el lenguaje constityue la base de las sociadades, en caso contrario se cae en la antidemocracia ya que existen condiciones desiguales. 
 
