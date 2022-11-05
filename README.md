@@ -11,9 +11,9 @@ Base de datos:  Wikipedia
 justificaciòn: 
 El indice de desarrollo humano respnde a factores economicos y sociales que determinan la situacion de la poblacion en relacion a la educacion y crecimiento economico. El indice de desarrollo humano respecto a la democracia es determiante ya que sin un crecimiento igualitario y con acceso a las herramientas básicas no puede existir una democracia solida. 
 
-Variable 2: Indice de paridad (paridad ) 
+Variable 2: Indice de brecha de genero (genero) 
 Base de datos: Statista 
-Justificaciòn: El indice de paridad responde a las desigualdades en  espacios laborales, participacion politica y acceso a la educacion dentro de un Estado. Es un factor determinante para la democracia, ya que a partir de el indice de paridad se puede obtener resultados sobre la democratizacion en respuesta a las dinamicas sociales correspondientes a participacion igyalitaria. Según Logroño, la democratizacion de las relaciones sociales se justifica en la deconstruccion de relaciones de poer jerárquicas. 2008) En base a esto se puede analizar de forma cuatitavtiva la influencia de la paridad en los indices de democracias. 
+Justificaciòn: El indice de brecha de género responde a las desigualdades en  espacios laborales, participacion politica y acceso a la educacion dentro de un Estado. Es un factor determinante para la democracia, ya que a partir de el indice de paridad se puede obtener resultados sobre la democratizacion en respuesta a las dinamicas sociales correspondientes a participacion igyalitaria. Según Logroño, la democratizacion de las relaciones sociales se justifica en la deconstruccion de relaciones de poer jerárquicas. 2008) En base a esto se puede analizar de forma cuatitavtiva la influencia de la paridad en los indices de democracias. 
 
 Variable 3: Alfabetización (alfabetización)
 Base de datos: Vdem 
