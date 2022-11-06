@@ -1,0 +1,198 @@
+---
+title: "cleandata"
+output: html_document
+date: '2022-11-06'
+---
+
+1. Apertura de la base de datos
+
+```{r}
+library(rio)
+library(htmltab)
+```
+
+
+#Variable dependiente: Índice de Democracia
+
+```{r}
+democracia ="https://github.com/ximenafuenzalida/Proyecto/raw/main/democracia.csv"
+datadem=import(democracia)
+```
+
+#Variable independiente 1 : Índice de Desarrollo Humano
+
+```{r}
+idh = "https://github.com/ximenafuenzalida/Proyecto/blob/main/idh.xlsx?raw=true"
+dataidh=import(idh)
+```
+
+
+#Variable independiente 2: Brecha de género
+
+```{r}
+genero = "https://github.com/ximenafuenzalida/Proyecto/raw/main/alfabetizacion.csv"
+datagen=import(genero)
+```
+
+
+
+#Variable independiente 3: Alfabetización
+
+```{r}
+alfabetización="https://github.com/ximenafuenzalida/Proyecto/raw/main/alfabetizacion.csv"
+datalit=import(alfabetización)
+```
+
+
+2. Limpieza de datos 
+
+
+#Variable dependiente: Índice de Democracia
+
+```{r}
+datadem=datadem[,c(3,5)]
+names(datadem)= c("pais","democracia")
+```
+
+```{r}
+row.names(datadem)= NULL
+str(datadem)
+datadem$democracia=as.numeric(datadem$democracia)
+```
+
+```{r}
+library(stringr)
+str_remove_all (datadem$pais," ")
+
+```
+
+```{r}
+pais =c(" ")
+gsub("\ s","",datadem$pais) 
+```
+
+```{r}
+library(stringr)
+datadem$pais <- str_trim(datadem$pais, side = "both")
+str(datadem)
+```
+
+
+
+
+#Variable independiente 1 : Índice de Desarrollo Humano
+
+```{r}
+dataidh=dataidh[,c(2,3)]
+names(dataidh)= c("pais","idh")
+```
+
+```{r}
+head(dataidh,10)
+tail(dataidh, 10)
+dataidh= dataidh[-c(1:7,202:276),]
+```
+
+```{r}
+row.names(dataidh)= NULL
+dataidh= dataidh[-c(67,117,162),]
+```
+
+```{r}
+row.names(dataidh)= NULL
+str(dataidh)
+dataidh$idh=as.numeric(dataidh$idh)
+```
+
+
+
+
+#Variable independiente 2: Brecha de género
+
+
+```{r}
+datagen=datagen[,c(1,2)]
+names(datagen)= c("pais","genero")
+```
+
+```{r}
+head(datagen,10)
+```
+
+```{r}
+str(datagen)
+datagen$genero=as.numeric(datagen$genero)
+```
+
+
+#Variable independiente 3: Alfabetización
+
+```{r}
+datalit=datalit[,c(1,2)]
+names(datalit)= c("pais","alfabetizacion")
+```
+
+```{r}
+str(datalit)
+datalit$alfabetizacion=as.numeric(datalit$alfabetizacion)
+```
+
+3. Integración de datos
+
+
+```{r}
+merge1 = merge(x = datagen, y = datalit, all.x = TRUE)
+by= "pais"
+```
+
+
+```{r}
+commonID= intersect(merge1$pais,dataidh$pais) 
+dataidh[!dataidh$pais %in% commonID,]
+```
+```{r}
+dataidh[4,1]= "Hong Kong"
+dataidh[20,1]= "Korea"
+dataidh[32,1]= "Turkey"
+dataidh[51,1]= "Darussalam"
+dataidh[52,1]= "Russia"
+dataidh[77,1]= "Iran"
+dataidh[82,1]= "Moldova"
+dataidh[107,1]= "Palestine"
+dataidh[116,1]= "Vietnam"
+dataidh[120,1]= "Bolivia"
+dataidh[122,1]= "Venezuela"
+dataidh[136,1]= "Micronesia"
+dataidh[142,1]= "Laos"
+dataidh[143,1]= "East Timor"
+dataidh[146,1]= "Eswatini"
+dataidh[152,1]= "Syria"
+dataidh[161,1]= "Ivory Coast"
+dataidh[155,1]= " Republic of the Congo"
+dataidh[163,1]= "Tanzania"
+dataidh[161,1]= "Democratic Republic of the Congo"
+```
+
+```{r}
+merge2 = merge(x = dataidh, y = merge1, all.x = TRUE)
+by= "pais"
+```
+
+
+```{r}
+datafinal=merge(datadem,merge2,all.x = TRUE)
+str(datafinal)
+```
+
+
+
+```{r}
+datafinal <- datafinal[complete.cases(datafinal), ]
+row.names(datafinal)= NULL
+```
+
+```{r}
+library(rio)
+export(datafinal,"datafinal.csv")
+```
+
