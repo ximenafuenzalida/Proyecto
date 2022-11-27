@@ -1,0 +1,169 @@
+---
+title: "Index"
+date: '2022-11-06'
+output:
+  html_document:
+    toc: yes
+    df_print: paged
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+    toc: yes
+---
+
+```{r include=FALSE}
+library(rio)
+data= import("https://github.com/ximenafuenzalida/Proyecto/raw/main/datafinal.csv")
+```
+
+### 1.Analisis de la data 
+
+
+```{r, echo=FALSE,results = FALSE}
+modelo= formula(democracia ~ idh, data=data) 
+summary(modelo)
+```
+
+
+
+```{r, echo=FALSE,results = FALSE}
+reg1=lm(modelo,data=data)
+summary(reg1)
+```
+
+```{r, echo=FALSE}
+library(knitr)
+library(modelsummary)
+reg1=lm(modelo,data=data)
+modelo1=list('Modelo 1'=reg1)
+modelsummary(modelo1, title = "Regresion: modelo 1",
+             stars = TRUE,
+             output = "kableExtra")
+```
+
+El analisis de la primera regresión refleja que 
+El r cuadrado indica que este modelo no tiene una explicación signiifcativa de la variabilidad ya que es de 0.4,  
+
+La variable IDH impacta de forma significativa y positivamente en la variable democracia, esto quiere decir que a mayor score de idh mayor democracia. 
+
+
+```{r, echo=FALSE,results = FALSE}
+modelo2= formula(democracia ~ idh+ genero) 
+```
+
+```{r, echo=FALSE,results = FALSE}
+reg2= lm(modelo2, data=data)
+summary(reg2)
+```
+
+
+
+```{r, echo=FALSE}
+reg2=lm(modelo2,data=data)
+model2=list('Modelo 2'=reg2)
+modelsummary(model2, title = "Regresion: modelo 2",
+             stars = TRUE,
+             output = "kableExtra")
+```
+
+El modelo de idh y genero impactan de forma signiifcativa y positivamente en la variable democracia  
+A diferencia del primer modelo, al incluir la variable genero el porcventaje de variable aumenta en 0.1, lo cual refleja que este modelo incremntr la explicacion oa algo asi de ka variablke por lo tanto es mejoir
+
+```{r, echo=FALSE,results = FALSE}
+modelo3= formula(democracia ~ idh+ genero + alfabetizacion) 
+```
+
+```{r, echo=FALSE,results = FALSE}
+reg3= lm(modelo3, data=data)
+summary(reg3)
+```
+
+```{r, echo=FALSE}
+reg3=lm(modelo3,data=data)
+model3=list('Modelo 3'=reg3)
+modelsummary(model3, title = "Regresion: modelo 3",
+             stars = TRUE,
+             output = "kableExtra")
+```
+
+
+```{r, echo=FALSE}
+models=list('Modelo 1'=reg1,'Modelo 2'=reg2, 'Modelo 3'=reg3 )
+modelsummary(models, title = "Resultados de todos los modelos",
+             stars = TRUE,
+             output = "kableExtra")
+```
+
+
+### 2. Analisis Factorial 
+
+
+
+El indice de demo raciaçEn este caso el analisis factorial no es aplcabel ay que en el enalisis de datos existe una seleccion de score de las variabkles genero odh yalfabetizcvio, por lo tanto a no contar con componentes que puedan concetar ambas secciones de las variaboes es mpisible nagcerlo
+
+
+
+
+
+### 3. Analisis de Conglomerados
+
+```{r, echo=FALSE}
+summary(data)
+```
+
+
+
+```{r, echo=FALSE}
+cluster=data[,c(2:4)]
+row.names(cluster)=data$pais
+```
+
+```{r, echo=FALSE}
+library(cluster)
+g.dist = daisy(cluster, metric="gower")
+```
+
+```{r, echo=FALSE}
+set.seed(123)
+res.pam=pam(g.dist,3,cluster.only = F)
+
+cluster$pam=res.pam$cluster
+
+head(cluster)
+```
+
+```{r, echo=FALSE}
+set.seed(123)
+library(factoextra)
+fviz_silhouette(res.pam,print.summary = F)
+```
+
+
+
+```{r, echo=FALSE,results = FALSE}
+exc=data.frame(res.pam$silinfo$widths)
+exc$country=row.names(exc)
+poorPAM=exc[exc$sil_width<0,'country']
+poorPAM
+```
+
+
+```{r, echo=FALSE}
+aggregate(.~ pam, data=cluster,mean)
+```
+
+
+
+
+### 4.Mapa 
+
+
+aaaaaa
+aaaaa
+
+dd
+
+
+
+
+
