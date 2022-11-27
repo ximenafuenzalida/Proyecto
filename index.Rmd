@@ -1,0 +1,112 @@
+---
+title: "Index"
+output: html_document
+date: '2022-11-06'
+---
+
+```{r}
+library(rio)
+data= import("https://github.com/ximenafuenzalida/Proyecto/raw/main/datafinal.csv")
+```
+
+1 Analisis de la data 
+
+
+```{r}
+modelo= formula(democracia ~ idh, data=data) 
+summary(modelo)
+```
+
+```{r}
+reg1=lm(modelo,data=data)
+summary(reg1)
+```
+
+```{r}
+library(knitr)
+library(modelsummary)
+reg1=lm(modelo,data=data)
+modelo1=list('Modelo 1'=reg1)
+modelsummary(modelo1, title = "Regresion: modelo 1",
+             stars = TRUE,
+             output = "kableExtra")
+```
+
+```{r}
+modelo2= formula(democracia ~ idh+ genero) 
+```
+
+```{r}
+reg2= lm(modelo2, data=data)
+summary(reg2)
+```
+
+
+
+```{r}
+reg2=lm(modelo2,data=data)
+model2=list('Modelo 2'=reg2)
+modelsummary(model2, title = "Regresion: modelo 2",
+             stars = TRUE,
+             output = "kableExtra")
+```
+
+
+
+```{r}
+modelo3= formula(democracia ~ idh+ genero + alfabetizacion) 
+```
+
+```{r}
+reg3= lm(modelo3, data=data)
+summary(reg3)
+```
+
+```{r}
+reg3=lm(modelo3,data=data)
+model3=list('Modelo 3'=reg3)
+modelsummary(model3, title = "Regresion: modelo 3",
+             stars = TRUE,
+             output = "kableExtra")
+```
+
+
+```{r}
+models=list('Modelo 1'=reg1,'Modelo 2'=reg2, 'Modelo 3'=reg3 )
+modelsummary(models, title = "Resultados de todos los modelos",
+             stars = TRUE,
+             output = "kableExtra")
+```
+
+
+3 Analisis Factorial 
+
+
+El indice de demo raciaçEn este caso el analisis factorial no es aplcabel ay que en el enalisis de datos existe una seleccion de score de las variabkles genero odh yalfabetizcvio, por lo tanto a no contar con componentes que puedan concetar ambas secciones de las variaboes es mpisible nagcerlo
+
+
+```{r}
+library(psych)
+library(ggcorrplot)
+```
+
+
+```{r}
+library(polycor)
+corMatrix=polycor::hetcor(data)$correlations
+```
+
+```{r}
+mat_cor <- hetcor(data)$correlations
+ggcorrplot(mat_cor,type="lower",hc.order = T)
+```
+
+
+
+```{r}
+library(polycor)
+afe1=polycor::hetcor(data$democracia)$correlations
+```
+
+
+
