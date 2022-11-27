@@ -3,12 +3,10 @@ title: "Index"
 date: '2022-11-06'
 output:
   html_document:
-    toc: yes
     df_print: paged
   prettydoc::html_pretty:
-    theme: cayman
+    theme: leonids
     highlight: github
-    toc: yes
 ---
 
 ```{r include=FALSE}
@@ -23,8 +21,6 @@ data= import("https://github.com/ximenafuenzalida/Proyecto/raw/main/datafinal.cs
 modelo= formula(democracia ~ idh, data=data) 
 summary(modelo)
 ```
-
-
 
 ```{r, echo=FALSE,results = FALSE}
 reg1=lm(modelo,data=data)
@@ -67,7 +63,7 @@ modelsummary(model2, title = "Regresion: modelo 2",
 ```
 
 El modelo de idh y genero impactan de forma signiifcativa y positivamente en la variable democracia  
-A diferencia del primer modelo, al incluir la variable genero el porcventaje de variable aumenta en 0.1, lo cual refleja que este modelo incremntr la explicacion oa algo asi de ka variablke por lo tanto es mejoir
+A diferencia del primer modelo, al incluir la variable genero el porcentaje de variable aumenta en 0.1, lo cual refleja que el porcentaje de explicacion de varibilidad en este modelo incrementa, por lo tanto es mejor que el modelo anterior. 
 
 ```{r, echo=FALSE,results = FALSE}
 modelo3= formula(democracia ~ idh+ genero + alfabetizacion) 
@@ -94,6 +90,7 @@ modelsummary(models, title = "Resultados de todos los modelos",
              output = "kableExtra")
 ```
 
+En la comparación de los modelos realizados 
 
 ### 2. Analisis Factorial 
 
@@ -105,16 +102,15 @@ El indice de demo raciaçEn este caso el analisis factorial no es aplcabel ay qu
 
 
 
-### 3. Analisis de Conglomerados
+### 3. Analisis de Conglomerados 
 
 ```{r, echo=FALSE}
 summary(data)
 ```
 
 
-
 ```{r, echo=FALSE}
-cluster=data[,c(2:4)]
+cluster=data[,c(2:5)]
 row.names(cluster)=data$pais
 ```
 
@@ -124,12 +120,14 @@ g.dist = daisy(cluster, metric="gower")
 ```
 
 ```{r, echo=FALSE}
+library(kableExtra)
+library(magrittr)
 set.seed(123)
 res.pam=pam(g.dist,3,cluster.only = F)
 
 cluster$pam=res.pam$cluster
 
-head(cluster)
+head(cluster,15)%>%kbl()%>%kable_styling()
 ```
 
 ```{r, echo=FALSE}
@@ -149,8 +147,9 @@ poorPAM
 
 
 ```{r, echo=FALSE}
-aggregate(.~ pam, data=cluster,mean)
+aggregate(.~ pam, data=cluster, mean)
 ```
+
 
 
 
@@ -158,12 +157,53 @@ aggregate(.~ pam, data=cluster,mean)
 ### 4.Mapa 
 
 
-aaaaaa
-aaaaa
+```{r, echo=FALSE,results = FALSE}
+library(sp)
+library(rgdal)
+```
 
-dd
+```{r, echo=FALSE,results = FALSE}
+fromGit=("https://github.com/ximenafuenzalida/Proyecto/raw/main/paises.json")
+mapa1 <- rgdal::readOGR(fromGit,stringsAsFactors = FALSE)
+
+```
+
+```{r, echo=FALSE,results = FALSE}
+plot(mapa1)
+```
 
 
+```{r, echo=FALSE}
+library(ggplot2)
+mapDIS=sf::read_sf("paises.json")
+ggplot(mapDIS) + geom_sf()
+names (mapDIS)[5] = "country"
+```
+
+
+
+
+```{r, echo=FALSE,results = FALSE}
+library(sf)
+library(purrr)
+library(tidyverse)
+library(ggplot2)
+library(ggrepel)
+mapDIS
+
+datos <- mapDIS %>%
+  left_join(data,
+            by = c("country" = "pais"))
+datos
+```
+
+```{r}
+datos %>% ggplot(aes(fill = democracia)) +
+  geom_sf()
+```
+
+
+En el mapa se puede observar que los paìses con indices de democracia mas bajos se 
 
 
 
