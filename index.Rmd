@@ -2,11 +2,11 @@
 title: "Index"
 date: '2022-11-06'
 output:
-  html_document:
-    df_print: paged
   prettydoc::html_pretty:
     theme: leonids
     highlight: github
+  html_document:
+    df_print: paged
 ---
 
 ```{r include=FALSE}
