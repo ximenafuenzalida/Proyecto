@@ -82,6 +82,9 @@ modelsummary(models, title = "Resultados de todos los modelos",
 3 Analisis Factorial 
 
 
+El indice de demo raciaçEn este caso el analisis factorial no es aplcabel ay que en el enalisis de datos existe una seleccion de score de las variabkles genero odh yalfabetizcvio, por lo tanto a no contar con componentes que puedan concetar ambas secciones de las variaboes es mpisible nagcerlo
+
+
 ```{r}
 library(psych)
 library(ggcorrplot)
