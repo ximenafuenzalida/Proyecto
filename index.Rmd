@@ -37,10 +37,9 @@ modelsummary(modelo1, title = "Regresion: modelo 1",
              output = "kableExtra")
 ```
 
-El analisis de la primera regresión refleja que 
-El r cuadrado indica que este modelo no tiene una explicación signiifcativa de la variabilidad ya que es de 0.4,  
+El analisis de la primera regresión refleja que la variable IDH impacta de forma significativa y positivamente en la variable democracia, esto quiere decir que a mayor score de idh mayor democracia.
+El r cuadrado indica que este modelo no tiene una explicación signiifcativa de la variabilidad ya que es de 0.4, por lo tanto no es un buen modelo.   
 
-La variable IDH impacta de forma significativa y positivamente en la variable democracia, esto quiere decir que a mayor score de idh mayor democracia. 
 
 
 ```{r, echo=FALSE,results = FALSE}
@@ -83,6 +82,9 @@ modelsummary(model3, title = "Regresion: modelo 3",
 ```
 
 
+En el Modelo 3 el valor del r2 no aumenta de forma significativa, por lo tanto la explicacion de la variabilidad del modelo se mantiene en 50%. Sin embargo, se observa que la varible genero tiene un impacto mayor al de las varibales idh y alfabetizacion, esto refleja que tiene un efecyo significativo y positivo en el índice de democracia.
+
+
 ```{r, echo=FALSE}
 models=list('Modelo 1'=reg1,'Modelo 2'=reg2, 'Modelo 3'=reg3 )
 modelsummary(models, title = "Resultados de todos los modelos",
@@ -90,14 +92,13 @@ modelsummary(models, title = "Resultados de todos los modelos",
              output = "kableExtra")
 ```
 
-En la comparación de los modelos realizados 
+En la comparación de los modelos realizados se puede observar que el modelo 3, el cual incluye a todas las variables independientes es el mejor modelo para explicar la variabilidad, y se confirma que la variable genero tiene una infliuencia significativa en el analisis y la varible con efcto menos dignificativo sobre el indice de democracia es la alfabetización.
 
 ### 2. Analisis Factorial 
 
 
 
-El indice de demo raciaçEn este caso el analisis factorial no es aplcabel ay que en el enalisis de datos existe una seleccion de score de las variabkles genero odh yalfabetizcvio, por lo tanto a no contar con componentes que puedan concetar ambas secciones de las variaboes es mpisible nagcerlo
-
+El indice de democracia explicado en base de las variables de IDH, genero y alfabetizaciòn, sin tomar en cuenta componentes exogenos y otras variables que puedan aportar en la efa, comprenden un resumen de un conjunto de varibles sí mismos, por lo tanto el analisis factorial exploratorio no explicaria los factores que se necesitan para completar el analisis. 
 
 
 
@@ -119,6 +120,7 @@ library(cluster)
 g.dist = daisy(cluster, metric="gower")
 ```
 
+Se solicitan 3 clusters 
 ```{r, echo=FALSE}
 library(kableExtra)
 library(magrittr)
@@ -130,6 +132,8 @@ cluster$pam=res.pam$cluster
 head(cluster,15)%>%kbl()%>%kable_styling()
 ```
 
+
+Se observa que los paises con menor indice de democracia 
 ```{r, echo=FALSE}
 set.seed(123)
 library(factoextra)
@@ -146,34 +150,45 @@ poorPAM
 ```
 
 
+Características de cada conglomerado:
+
+
+
 ```{r, echo=FALSE}
 aggregate(.~ pam, data=cluster, mean)
 ```
 
 
+```{r, echo=FALSE}
+proyeccion = cmdscale(g.dist, k=2,add = T) 
+head(proyeccion$points,20)
+```
+
+```{r, echo=FALSE}
+data$dim1 <- proyeccion$points[,1]
+data$dim2 <- proyeccion$points[,2]
+```
 
 
 
 ### 4.Mapa 
 
 
-```{r, echo=FALSE,results = FALSE}
+```{r, echo=FALSE,results = FALSE, message=FALSE}
 library(sp)
 library(rgdal)
 ```
 
-```{r, echo=FALSE,results = FALSE}
+```{r, echo=FALSE,results = FALSE, warning=FALSE, message=FALSE}
 fromGit=("https://github.com/ximenafuenzalida/Proyecto/raw/main/paises.json")
 mapa1 <- rgdal::readOGR(fromGit,stringsAsFactors = FALSE)
 
 ```
 
-```{r, echo=FALSE,results = FALSE}
-plot(mapa1)
-```
 
 
-```{r, echo=FALSE}
+
+```{r, echo=FALSE,results = FALSE, fig.show='hide', message=FALSE}
 library(ggplot2)
 mapDIS=sf::read_sf("paises.json")
 ggplot(mapDIS) + geom_sf()
@@ -183,7 +198,7 @@ names (mapDIS)[5] = "country"
 
 
 
-```{r, echo=FALSE,results = FALSE}
+```{r, echo=FALSE,results = FALSE, message=FALSE}
 library(sf)
 library(purrr)
 library(tidyverse)
@@ -197,13 +212,13 @@ datos <- mapDIS %>%
 datos
 ```
 
-```{r}
+```{r,echo=FALSE,message=FALSE}
 datos %>% ggplot(aes(fill = democracia)) +
   geom_sf()
 ```
 
 
-En el mapa se puede observar que los paìses con indices de democracia mas bajos se 
+En el mapa se puede observar que los paìses con indices de democracia mas bajos, con un valor de 5.0< con mayoritarios y son de color azul oscuro y los paises con mayores indices de democracia, con valor mayor a 5.0 se concentran en America, Ocenia y Europa. 
 
 
 
