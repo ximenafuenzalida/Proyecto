@@ -19,4 +19,4 @@ Variable 3: Alfabetización (alfabetización)
 Base de datos: Our World in Data
 Justificación: La alfabetización como variable sirve para medir el indice de democracia  de los países con menores tazas de alfabetizacion. En este caso se busca comprobar que las tasas mas bajas de alfabetizacion se concentran enlas zonas mas pobres de los territorios en vias de desarrollo. Según Noddings (2013) la alfabetizacion y, por ende, el acceso al aprendizaje y a lenguaje es una de las formas basicas de democracia pues el lenguaje constityue la base de las sociadades, en caso contrario se cae en la antidemocracia ya que existen condiciones desiguales. 
 
-
+Pagina Web: https://ximenafuenzalida.github.io/Proyecto/
