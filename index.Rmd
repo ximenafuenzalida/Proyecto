@@ -105,7 +105,7 @@ El indice de democracia explicado en base de las variables de IDH, genero y alfa
 
 ### 3. Analisis de Conglomerados 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE,results = FALSE}
 summary(data)
 ```
 
@@ -120,7 +120,8 @@ library(cluster)
 g.dist = daisy(cluster, metric="gower")
 ```
 
-Se solicitan 3 clusters 
+Se solicitan 3 clusters y se realiza el analisis a través de PAM 
+
 ```{r, echo=FALSE}
 library(kableExtra)
 library(magrittr)
@@ -133,7 +134,7 @@ head(cluster,15)%>%kbl()%>%kable_styling()
 ```
 
 
-Se observa que los paises con menor indice de democracia 
+Se observan los paises con menor indice de democracia fuera de la clusterización
 ```{r, echo=FALSE}
 set.seed(123)
 library(factoextra)
@@ -159,12 +160,12 @@ aggregate(.~ pam, data=cluster, mean)
 ```
 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE,results = FALSE}
 proyeccion = cmdscale(g.dist, k=2,add = T) 
 head(proyeccion$points,20)
 ```
 
-```{r, echo=FALSE}
+```{r, echo=FALSE,results = FALSE}
 data$dim1 <- proyeccion$points[,1]
 data$dim2 <- proyeccion$points[,2]
 ```
